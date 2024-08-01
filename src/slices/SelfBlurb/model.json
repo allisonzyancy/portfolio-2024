@@ -1,0 +1,28 @@
+{
+  "id": "self_blurb",
+  "type": "SharedSlice",
+  "name": "SelfBlurb",
+  "description": "SelfBlurb",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "blurb": {
+          "type": "StructuredText",
+          "config": {
+            "label": "blurb",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

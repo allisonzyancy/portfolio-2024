@@ -21,10 +21,17 @@
           "thumbnails": []
         }
       },
-      "title_text": {
+      "title": {
         "type": "Text",
         "config": {
           "label": "Title Text",
+          "placeholder": ""
+        }
+      },
+      "subtitle": {
+        "type": "Text",
+        "config": {
+          "label": "Subtitle",
           "placeholder": ""
         }
       },
@@ -37,11 +44,26 @@
           "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
+      "self_blurb": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Self Blurb",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "self_blurb": {
+              "type": "SharedSlice"
+            },
+            "rich_text": {
+              "type": "SharedSlice"
+            },
             "skills_section": {
               "type": "SharedSlice"
             },

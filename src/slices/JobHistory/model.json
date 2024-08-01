@@ -10,7 +10,18 @@
       "docURL": "...",
       "version": "initial",
       "description": "Default",
-      "imageUrl": ""
+      "imageUrl": "",
+      "primary": {
+        "resume": {
+          "type": "Link",
+          "config": {
+            "label": "Resume",
+            "placeholder": "",
+            "select": "media"
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }

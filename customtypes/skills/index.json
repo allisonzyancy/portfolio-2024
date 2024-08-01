@@ -1,7 +1,7 @@
 {
   "format": "custom",
   "id": "skills",
-  "label": "Skills",
+  "label": "Skill",
   "repeatable": true,
   "status": true,
   "json": {

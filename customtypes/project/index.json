@@ -8,9 +8,17 @@
     "Main": {
       "uid": {
         "config": {
-          "label": "UID"
+          "label": "UID",
+          "placeholder": ""
         },
         "type": "UID"
+      },
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Title",
+          "placeholder": ""
+        }
       },
       "project_image": {
         "type": "Image",
@@ -18,13 +26,6 @@
           "label": "Project Image",
           "constraint": {},
           "thumbnails": []
-        }
-      },
-      "title": {
-        "type": "Text",
-        "config": {
-          "label": "Title",
-          "placeholder": ""
         }
       },
       "description": {

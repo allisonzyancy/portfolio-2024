@@ -34,12 +34,35 @@
           "placeholder": ""
         }
       },
-      "related_skills": {
+      "job_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Job Description",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+        }
+      },
+      "date_started": {
+        "type": "Date",
+        "config": {
+          "label": "Date Started",
+          "placeholder": ""
+        }
+      },
+      "date_ended": {
+        "type": "Date",
+        "config": {
+          "label": "Date Ended",
+          "placeholder": ""
+        }
+      },
+      "company_link": {
         "type": "Link",
         "config": {
-          "label": "Related Skills",
-          "select": "document",
-          "customtypes": ["skills"]
+          "label": "Company Link",
+          "placeholder": "",
+          "select": null
         }
       }
     }

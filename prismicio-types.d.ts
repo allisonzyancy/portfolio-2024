@@ -42,15 +42,48 @@ interface JobDocumentData {
   company_name: prismic.KeyTextField;
 
   /**
-   * Related Skills field in *Job*
+   * Job Description field in *Job*
    *
-   * - **Field Type**: Content Relationship
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: job.related_skills
+   * - **API ID Path**: job.job_description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  job_description: prismic.RichTextField;
+
+  /**
+   * Date Started field in *Job*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.date_started
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date_started: prismic.DateField;
+
+  /**
+   * Date Ended field in *Job*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.date_ended
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  date_ended: prismic.DateField;
+
+  /**
+   * Company Link field in *Job*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job.company_link
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  related_skills: prismic.ContentRelationshipField<"skills">;
+  company_link: prismic.LinkField;
 }
 
 /**
@@ -66,6 +99,8 @@ export type JobDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, "job", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | SelfBlurbSlice
+  | RichTextSlice
   | SkillsSectionSlice
   | JobHistorySlice
   | FeaturedProjectsSlice;
@@ -90,11 +125,22 @@ interface PageDocumentData {
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: page.title_text
+   * - **API ID Path**: page.title
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  title_text: prismic.KeyTextField;
+  title: prismic.KeyTextField;
+
+  /**
+   * Subtitle field in *Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  subtitle: prismic.KeyTextField;
 
   /**
    * Lead Text field in *Page*
@@ -106,6 +152,17 @@ interface PageDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   lead_text: prismic.RichTextField;
+
+  /**
+   * Self Blurb field in *Page*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: page.self_blurb
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  self_blurb: prismic.RichTextField;
 
   /**
    * Slice Zone field in *Page*
@@ -167,17 +224,6 @@ export type PageDocument<Lang extends string = string> =
  */
 interface ProjectDocumentData {
   /**
-   * Project Image field in *Project*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: project.project_image
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  project_image: prismic.ImageField<never>;
-
-  /**
    * Title field in *Project*
    *
    * - **Field Type**: Text
@@ -187,6 +233,17 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   title: prismic.KeyTextField;
+
+  /**
+   * Project Image field in *Project*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.project_image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  project_image: prismic.ImageField<never>;
 
   /**
    * Description field in *Project*
@@ -239,11 +296,11 @@ export type ProjectDocument<Lang extends string = string> =
   >;
 
 /**
- * Content for Skills documents
+ * Content for Skill documents
  */
 interface SkillsDocumentData {
   /**
-   * Skill Name field in *Skills*
+   * Skill Name field in *Skill*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
@@ -255,7 +312,7 @@ interface SkillsDocumentData {
 }
 
 /**
- * Skills document from Prismic
+ * Skill document from Prismic
  *
  * - **API ID**: `skills`
  * - **Repeatable**: `true`
@@ -318,6 +375,21 @@ export type FeaturedProjectsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *JobHistory → Default → Primary*
+ */
+export interface JobHistorySliceDefaultPrimary {
+  /**
+   * Resume field in *JobHistory → Default → Primary*
+   *
+   * - **Field Type**: Link to Media
+   * - **Placeholder**: *None*
+   * - **API ID Path**: job_history.default.primary.resume
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  resume: prismic.LinkToMediaField;
+}
+
+/**
  * Default variation for JobHistory Slice
  *
  * - **API ID**: `default`
@@ -326,7 +398,7 @@ export type FeaturedProjectsSlice = prismic.SharedSlice<
  */
 export type JobHistorySliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<JobHistorySliceDefaultPrimary>,
   never
 >;
 
@@ -393,6 +465,51 @@ export type RichTextSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *SelfBlurb → Default → Primary*
+ */
+export interface SelfBlurbSliceDefaultPrimary {
+  /**
+   * blurb field in *SelfBlurb → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: self_blurb.default.primary.blurb
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  blurb: prismic.RichTextField;
+}
+
+/**
+ * Default variation for SelfBlurb Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SelfBlurbSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<SelfBlurbSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *SelfBlurb*
+ */
+type SelfBlurbSliceVariation = SelfBlurbSliceDefault;
+
+/**
+ * SelfBlurb Shared Slice
+ *
+ * - **API ID**: `self_blurb`
+ * - **Description**: SelfBlurb
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SelfBlurbSlice = prismic.SharedSlice<
+  "self_blurb",
+  SelfBlurbSliceVariation
+>;
+
+/**
  * Default variation for SkillsSection Slice
  *
  * - **API ID**: `default`
@@ -447,12 +564,17 @@ declare module "@prismicio/client" {
       FeaturedProjectsSliceVariation,
       FeaturedProjectsSliceDefault,
       JobHistorySlice,
+      JobHistorySliceDefaultPrimary,
       JobHistorySliceVariation,
       JobHistorySliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
+      SelfBlurbSlice,
+      SelfBlurbSliceDefaultPrimary,
+      SelfBlurbSliceVariation,
+      SelfBlurbSliceDefault,
       SkillsSectionSlice,
       SkillsSectionSliceVariation,
       SkillsSectionSliceDefault,

@@ -6,5 +6,6 @@ export const components = {
   featured_projects: dynamic(() => import("./FeaturedProjects")),
   job_history: dynamic(() => import("./JobHistory")),
   rich_text: dynamic(() => import("./RichText")),
+  self_blurb: dynamic(() => import("./SelfBlurb")),
   skills_section: dynamic(() => import("./SkillsSection")),
 };
