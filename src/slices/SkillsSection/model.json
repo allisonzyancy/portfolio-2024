@@ -1,0 +1,16 @@
+{
+  "id": "skills_section",
+  "type": "SharedSlice",
+  "name": "SkillsSection",
+  "description": "SkillsSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}

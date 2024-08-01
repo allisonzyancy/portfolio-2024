@@ -1,0 +1,24 @@
+{
+  "format": "custom",
+  "id": "skills",
+  "label": "Skills",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "skill_name": {
+        "type": "Text",
+        "config": {
+          "label": "Skill Name",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}

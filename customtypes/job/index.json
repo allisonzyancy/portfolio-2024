@@ -1,0 +1,47 @@
+{
+  "format": "custom",
+  "id": "job",
+  "label": "Job",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "company_logo": {
+        "type": "Image",
+        "config": {
+          "label": "Company Logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "job_title": {
+        "type": "Text",
+        "config": {
+          "label": "Job Title",
+          "placeholder": ""
+        }
+      },
+      "company_name": {
+        "type": "Text",
+        "config": {
+          "label": "Company Name",
+          "placeholder": ""
+        }
+      },
+      "related_skills": {
+        "type": "Link",
+        "config": {
+          "label": "Related Skills",
+          "select": "document",
+          "customtypes": ["skills"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "job_history",
+  "type": "SharedSlice",
+  "name": "JobHistory",
+  "description": "JobHistory",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}
