@@ -6,7 +6,6 @@ import { createClient } from "@/prismicio";
 import { getTheMonth } from "@/utils/month";
 import { Content, asDate } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
-import Link from "next/link";
 
 /**
  * Props for `JobHistory`.
@@ -20,7 +19,10 @@ const JobHistory = async ({ slice }: JobHistoryProps): Promise<JSX.Element> => {
   const client = createClient();
 
   const jobs = await client.getAllByType('job', {
-    fetchLinks: 'skill.skill_name'
+    orderings: {
+      field: 'my.job.date_ended',
+      direction: 'desc',
+    },
   });
 
   const jobList = jobs.map((job, i) => {
@@ -71,14 +73,14 @@ const JobHistory = async ({ slice }: JobHistoryProps): Promise<JSX.Element> => {
       id="experience"
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
     >
-      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Experience</h2>
+      <div className="sticky-section-header sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 md:text-md lg:text-lg">Experience</h2>
       </div>
       <ol className="group/list">
         {jobList}
       </ol>
       <div className="mt-12">
-        <ArrowLink href="#">
+        <ArrowLink href="https://ay-portfolio-2024.cdn.prismic.io/ay-portfolio-2024/ZrEprEaF0TcGIsi7_AY_Resume_2024.pdf" target="_blank">
           View Full Résumé
         </ArrowLink>
       </div>

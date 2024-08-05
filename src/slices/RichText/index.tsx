@@ -12,7 +12,7 @@ export const components: JSXMapSerializer = {
     return <p className="mb-4 text-slate-200 text-opacity-55">{children}</p>
   },
   hyperlink: ({ node, children }) => {
-    return <PrismicNextLink field={node.data} className="font-medium text-slate-200 hover:text-pink-300 focus-visible:text-pink-300 text-opacity-100">{children}</PrismicNextLink>;
+    return <PrismicNextLink field={node.data} className="font-medium text-pink-300 hover:text-pink-400 focus-visible:text-pink-300 text-opacity-100">{children}</PrismicNextLink>;
   },
   label: ({ node, children }) => {
     if (node.data.label === "codespan") {

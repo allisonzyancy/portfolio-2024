@@ -2,7 +2,7 @@ import { ArrowLink } from "@/app/components/arrow-link";
 import { ArrowOutIcon } from "@/app/components/icons";
 import { Tags } from "@/app/components/tags";
 import { createClient } from "@/prismicio";
-import { Content } from "@prismicio/client";
+import { Content, filter, predicate } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Link from "next/link";
@@ -20,10 +20,31 @@ const FeaturedProjects = async ({ slice }: FeaturedProjectsProps): Promise<JSX.E
   const client = createClient();
 
   const projects = await client.getAllByType('project', {
-    limit: 5
+    // filters: [
+    //   filter.at('document.featured', true)
+    // ],
+    predicates: [
+      filter.at('my.project.featured', true)
+    ],
+    orderings: { field: 'document.first_publication_date', direction: 'asc' },
+    graphQuery: `{
+      project {
+        ...projectFields
+        project_job {
+          ...on job {
+            date_ended
+          }
+        }
+      }
+    }`
   });
 
-  const projectsRendered = projects.map((project) => {
+  const projectsRendered = projects.sort((a:any, b:any) => {
+    const aDate = new Date(a.data.project_job?.data.date_ended || 0);
+    const bDate = new Date(b.data.project_job?.data.date_ended || 0);
+
+    return bDate.getTime() - aDate.getTime();
+  }).map((project) => {
     const { uid, data, tags } = project;
 
     return (
@@ -56,8 +77,8 @@ const FeaturedProjects = async ({ slice }: FeaturedProjectsProps): Promise<JSX.E
       className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
       aria-label="Selected Projects"
     >
-      <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 lg:sr-only">Projects</h2>
+      <div className="sticky-section-header sticky top-0 z-20 -mx-6 mb-4 w-screen bg-slate-900/75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-slate-200 md:text-md lg:text-lg">Featured Projects</h2>
       </div>
       <div>
         <ul className="group/list">
@@ -65,7 +86,7 @@ const FeaturedProjects = async ({ slice }: FeaturedProjectsProps): Promise<JSX.E
         </ul>
       </div>
       <div className="mt-12">
-        <ArrowLink arrowDirection="right" href="#">
+        <ArrowLink arrowDirection="right" href="/projects">
           Full Project Archive
         </ArrowLink>
       </div>

@@ -99,6 +99,7 @@ export type JobDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, "job", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | ProjectArchiveSlice
   | SelfBlurbSlice
   | RichTextSlice
   | SkillsSectionSlice
@@ -277,6 +278,29 @@ interface ProjectDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   project_link: prismic.LinkField;
+
+  /**
+   * year field in *Project*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: project.year
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  year: prismic.KeyTextField;
+
+  /**
+   * Featured field in *Project*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: project.featured
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  featured: prismic.BooleanField;
 }
 
 /**
@@ -417,6 +441,36 @@ type JobHistorySliceVariation = JobHistorySliceDefault;
 export type JobHistorySlice = prismic.SharedSlice<
   "job_history",
   JobHistorySliceVariation
+>;
+
+/**
+ * Default variation for ProjectArchive Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectArchiveSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *ProjectArchive*
+ */
+type ProjectArchiveSliceVariation = ProjectArchiveSliceDefault;
+
+/**
+ * ProjectArchive Shared Slice
+ *
+ * - **API ID**: `project_archive`
+ * - **Description**: ProjectArchive
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ProjectArchiveSlice = prismic.SharedSlice<
+  "project_archive",
+  ProjectArchiveSliceVariation
 >;
 
 /**
@@ -567,6 +621,9 @@ declare module "@prismicio/client" {
       JobHistorySliceDefaultPrimary,
       JobHistorySliceVariation,
       JobHistorySliceDefault,
+      ProjectArchiveSlice,
+      ProjectArchiveSliceVariation,
+      ProjectArchiveSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,

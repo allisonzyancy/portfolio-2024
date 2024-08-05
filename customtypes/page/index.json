@@ -58,6 +58,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "project_archive": {
+              "type": "SharedSlice"
+            },
             "self_blurb": {
               "type": "SharedSlice"
             },

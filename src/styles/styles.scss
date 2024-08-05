@@ -1,0 +1,12 @@
+html {
+  font-size: 17px;
+  scroll-behavior: smooth !important;
+}
+
+.sticky-section-header {
+  max-width: calc(100% + 3rem);
+
+  @media (screen) and (min-width: 768px) {
+    max-width: calc(100% + 6rem);
+  }
+}

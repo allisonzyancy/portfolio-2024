@@ -6,6 +6,8 @@ import * as prismic from "@prismicio/client";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { PrismicNextLink } from "@prismicio/next";
+import { ArrowLeftIcon } from "../components/icons";
 
 type Params = { uid: string };
 
@@ -44,18 +46,14 @@ export default async function Page({ params }: { params: Params }) {
     .catch(() => notFound());
 
   return (
-    <div className="lg:flex lg:justify-between lg:gap-4">
-      <header className="lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between lg:py-24">
-        <div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl">{page.data.title}</h1>
-          <h2 className="mt-3 text-lg font-medium tracking-tight text-slate-200 sm:text-xl">{page.data.subtitle}</h2>
-          <PrismicRichText field={page.data.lead_text} />
-        </div>
-      </header>
-      
-      <main className="pt-24 lg:w-1/2 lg:py-24">
-        <SliceZone slices={page.data.slices} components={components} />
-      </main>
+    <div className="mt-24">
+      <PrismicNextLink href="/" className="group mb-2 inline-flex items-center font-semibold leading-tight text-pink-400 text-xl">
+        <ArrowLeftIcon />
+        Allison Yancy
+      </PrismicNextLink>
+      <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl mb-4">{page.data.title}</h1>
+      <p className="mb-4 text-slate-200 text-opacity-55">{page.data.subtitle}</p>
+      <SliceZone slices={page.data.slices} components={components} />
     </div>
   );
 }

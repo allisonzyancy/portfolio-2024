@@ -5,11 +5,12 @@ import { LinkField } from "@prismicio/client"
 
 type ArrowLinkProps = {
   children?: ReactNode | JSX.Element | JSX.Element[],
-  linkField?: LinkField,
+  linkField?: LinkField | any,
   href?: string,
   simple?: boolean,
   className?: string,
-  arrowDirection?: 'out' | 'right'
+  arrowDirection?: 'out' | 'right',
+  target?: string
 }
 
 export const ArrowLink = ({
@@ -18,7 +19,8 @@ export const ArrowLink = ({
   simple,
   className,
   href,
-  arrowDirection = 'out'
+  arrowDirection = 'out',
+  target
 }: ArrowLinkProps): JSX.Element => {
   const classes = [
     'inline-flex items-baseline font-medium leading-tight text-slate-200 hover:text-pink-300 focus-visible:text-pink-300  group/link text-base relative',
@@ -37,9 +39,15 @@ export const ArrowLink = ({
     </>
   );
 
+  if (!linkField?.url && !href) {
+    return (
+      <span className={classes}>{children}</span>
+    )
+  }
+
   if (!linkField && href) {
     return (
-      <a className={classes} href={href} target="_blank">
+      <a className={classes} href={href} target={target}>
         {theLinkContent}
       </a>
     )
