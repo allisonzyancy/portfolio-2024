@@ -68,8 +68,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ fullVersion = false }) => {
 
     const thread = await openaiClient.beta.threads.create();
 
-    console.log(assistantClient);
-
     setOpenai(openaiClient);
     setAssistant(assistantClient);
     setThread(thread);
