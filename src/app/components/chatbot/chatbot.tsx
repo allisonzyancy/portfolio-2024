@@ -51,7 +51,6 @@ const Chatbot: React.FC<ChatbotProps> = ({ fullVersion = false }) => {
 
   const initChatBot = async () => {
     const openaiClient = new OpenAI({
-      // apiKey: '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',
       apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
       dangerouslyAllowBrowser: true
     });
