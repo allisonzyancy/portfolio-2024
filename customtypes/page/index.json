@@ -58,6 +58,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "full_chatbot": {
+              "type": "SharedSlice"
+            },
             "project_archive": {
               "type": "SharedSlice"
             },

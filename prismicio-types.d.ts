@@ -99,6 +99,7 @@ export type JobDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<JobDocumentData>, "job", Lang>;
 
 type PageDocumentDataSlicesSlice =
+  | FullChatbotSlice
   | ProjectArchiveSlice
   | SelfBlurbSlice
   | RichTextSlice
@@ -399,6 +400,36 @@ export type FeaturedProjectsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for FullChatbot Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FullChatbotSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *FullChatbot*
+ */
+type FullChatbotSliceVariation = FullChatbotSliceDefault;
+
+/**
+ * FullChatbot Shared Slice
+ *
+ * - **API ID**: `full_chatbot`
+ * - **Description**: FullChatbot
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FullChatbotSlice = prismic.SharedSlice<
+  "full_chatbot",
+  FullChatbotSliceVariation
+>;
+
+/**
  * Primary content in *JobHistory → Default → Primary*
  */
 export interface JobHistorySliceDefaultPrimary {
@@ -617,6 +648,9 @@ declare module "@prismicio/client" {
       FeaturedProjectsSliceDefaultPrimary,
       FeaturedProjectsSliceVariation,
       FeaturedProjectsSliceDefault,
+      FullChatbotSlice,
+      FullChatbotSliceVariation,
+      FullChatbotSliceDefault,
       JobHistorySlice,
       JobHistorySliceDefaultPrimary,
       JobHistorySliceVariation,

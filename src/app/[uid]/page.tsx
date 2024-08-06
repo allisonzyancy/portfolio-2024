@@ -8,6 +8,7 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { PrismicNextLink } from "@prismicio/next";
 import { ArrowLeftIcon } from "../components/icons";
+import { components as rtComponents } from '@/slices/RichText';
 
 type Params = { uid: string };
 
@@ -45,14 +46,20 @@ export default async function Page({ params }: { params: Params }) {
     .getByUID("page", params.uid)
     .catch(() => notFound());
 
+  const pageClasses = [
+    'md:pt-24',
+    params.uid === 'assistant' ? 'flex flex-col' : ''
+  ].join(' ');
+
   return (
-    <div className="mt-24">
+    <div className={pageClasses} style={params.uid === 'assistant' ? { flex: '1 1 1rem'} : {}}>
       <PrismicNextLink href="/" className="group mb-2 inline-flex items-center font-semibold leading-tight text-pink-400 text-xl">
         <ArrowLeftIcon />
         Allison Yancy
       </PrismicNextLink>
       <h1 className="text-4xl font-bold tracking-tight text-slate-200 sm:text-5xl mb-4">{page.data.title}</h1>
       <p className="mb-4 text-slate-200 text-opacity-55">{page.data.subtitle}</p>
+      <PrismicRichText field={page.data.lead_text} components={rtComponents} />
       <SliceZone slices={page.data.slices} components={components} />
     </div>
   );

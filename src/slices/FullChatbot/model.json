@@ -1,0 +1,16 @@
+{
+  "id": "full_chatbot",
+  "type": "SharedSlice",
+  "name": "FullChatbot",
+  "description": "FullChatbot",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}
