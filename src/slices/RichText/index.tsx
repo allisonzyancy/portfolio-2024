@@ -19,6 +19,12 @@ export const components: JSXMapSerializer = {
       return <code>{children}</code>;
     }
   },
+  strong: ({ node, children }) => {
+    return <strong className="font-bold text-pink-300">{children}</strong>
+  },
+  heading6: ({ children }) => {
+    return <h6 className="text-xs max-w-96">{ children }</h6>
+  }
 };
 
 /**
