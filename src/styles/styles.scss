@@ -49,3 +49,22 @@ html {
 .ai-msg {
   border-top-left-radius: 0;
 }
+
+#chatbotContainer:not(.full-version) {
+  @media (max-height: 1066px) {
+    display: none;
+  }
+}
+
+.height-alt {
+  @media (max-height: 1066px) and (min-width: 768px) {
+    display: inline;
+  }
+}
+
+.height-reg {
+  @media (max-height: 1066px) {
+    display: none;
+  }
+}
+
