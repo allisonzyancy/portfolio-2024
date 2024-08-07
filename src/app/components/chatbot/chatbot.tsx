@@ -57,7 +57,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ fullVersion = false }) => {
 
     const assistantClient:any = await openaiClient.beta.assistants.create({
       name: "Allison's Assistant",
-      instructions: "You are an expert about my career and experience in the development industry.",
+      instructions: "You are an expert about Allison (Allie) Yancy's career and experience in the development industry.",
       tools: [{ type: "code_interpreter" }, { type: "file_search" }],
       model: "gpt-4-turbo"
     });

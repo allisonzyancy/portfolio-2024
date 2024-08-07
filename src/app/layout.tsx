@@ -3,6 +3,7 @@ import { repositoryName } from "@/prismicio";
 import '../styles/globals.css';
 import '../styles/styles.scss';
 import Spotlight from "./components/spotlight";
+import Head from "next/head";
 
 export default function RootLayout({
   children,
