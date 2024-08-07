@@ -123,9 +123,15 @@ const Chatbot: React.FC<ChatbotProps> = ({ fullVersion = false }) => {
     }
   };
 
+  const chatbotContainerClasses = [
+    fullVersion ? 'full-version' : '',
+    !fullVersion ? 'max-h-[35rem]' : '',
+    'flex flex-col justify-end'
+  ].join(' ');
+
   const msgWindowClasses = [
     'w-full p-8 bg-slate-800/50 items-start flex-1 overflow-y-scroll lg:block scrollbar-track-slate-200/15 scrollbar-thumb-pink-300 scrollbar-thin backdrop-blur scroll-smooth',
-    !fullVersion ? 'max-h-96 hidden' : '',
+    !fullVersion ? 'hidden' : '',
     fullVersion ? 'lg:min-h-96 min-h-96' : ''
   ].join(' ');
 
@@ -144,46 +150,55 @@ const Chatbot: React.FC<ChatbotProps> = ({ fullVersion = false }) => {
           </h3>
         )
       }
-      <span className="text-xs text-pink-300 font-light mb-3 hidden lg:block">Fueled by OpenAI Assistant</span>
-      <div className={msgWindowClasses}
-        id="chatWindow"
-        style={{ flex: '1 1 1rem' }}
+      
+      <div className={chatbotContainerClasses} style={{ flex: '1 1 1rem' }}
+        id="chatbotContainer"
       >
-        {messages.map((message, index) => (
-          <Message key={`message-${index}`} message={message} />
-        ))}
-        { isWaiting && (
-          <div className="convo-dots bg-slate-700/50 p-3 rounded-lg w-auto justify-self-start inline-block">
-            <TypingDots />
-          </div>
-        )}
-      </div>
-      <form
-        className={formClasses}
-        onSubmit={handleSendMessage}
-      >
-        <textarea
-          className="w-full p-8 bg-transparent resize-none"
-          placeholder="Ask a question..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleKeyPress}
-          required
-          disabled={isWaiting}
-          maxLength={50}
-        />
-        <span className="text-xs text-pink-300 absolute bottom-2 right-2">
-          {input.length}/50
-        </span>
-        <div className="absolute inline-block -top-16 right-6 text-pink-300 bg-slate-900 rounded-full p-2 border-pink-400 border-solid border opacity-50 transition-opacity hover:opacity-100 cursor-pointer"
-          onClick={() => scrollChatWindow()}
+        <span className="text-xs text-pink-300 font-light mb-3 hidden lg:block">Fueled by OpenAI Assistant</span>
+        <div className={msgWindowClasses}
+          id="chatWindow"
+          style={{ flex: '1 1 1rem' }}
         >
-          <ArrowDownConvo />
+          {messages.map((message, index) => (
+            <Message key={`message-${index}`} message={message} />
+          ))}
+          { isWaiting && (
+            <div className="convo-dots bg-slate-700/50 p-3 rounded-lg w-auto justify-self-start inline-block">
+              <TypingDots />
+            </div>
+          )}
         </div>
-      </form>
+        <form
+          className={formClasses}
+          onSubmit={handleSendMessage}
+        >
+          <textarea
+            className="w-full p-8 bg-transparent resize-none"
+            placeholder="Ask a question..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyPress}
+            required
+            disabled={isWaiting}
+            maxLength={50}
+          />
+          <span className="text-xs text-pink-300 absolute bottom-2 right-2">
+            {input.length}/50
+          </span>
+          <div className="absolute inline-block -top-16 right-6 text-pink-300 bg-slate-900 rounded-full p-2 border-pink-400 border-solid border opacity-50 transition-opacity hover:opacity-100 cursor-pointer"
+            onClick={() => scrollChatWindow()}
+          >
+            <ArrowDownConvo />
+          </div>
+        </form>
+      </div>
+      
       {
         !fullVersion && (
-          <ArrowLink href="/assistant" arrowDirection="right" className="!text-pink-300 font-medium *:hover:text-pink-400 text-sm hidden lg:block">Expand for full version</ArrowLink>
+          <ArrowLink href="/assistant" arrowDirection="right" className="!text-pink-300 font-medium *:hover:text-pink-400 text-sm hidden lg:block">
+            <span className="hidden height-alt">Meet My Assistant</span>
+            <span className="height-reg">Expand for full version</span>
+          </ArrowLink>
         )
       }
     </div>
